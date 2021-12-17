@@ -1,0 +1,147 @@
+@use "../base" as b;
+
+.Creditcard {
+  background-color: b.$bg-color;
+  color: b.$main-font-color;
+  max-width: 600px;
+  width: 80%;
+  margin: auto;
+}
+
+.Creditcard > main {
+  h1 {
+    font-size: b.$heading-font-size;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
+
+.Creditcard > main > form {
+  margin-top: calc(0.5rem + 2vh);
+  .line {
+    margin-bottom: calc(0.8rem + 0.3vw + 0.5vh);
+
+    .input_wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      margin: 0.5rem 0 0.2rem 0;
+    }
+
+    input {
+      background-color: b.$buttons-bg;
+      // color: #9da6c1;
+      color: #cdd5ea;
+      font-weight: 200;
+      border: none;
+
+      font-size: b.$creditcard-bodytext-size;
+      border-radius: 5px;
+      padding: 0.6rem;
+    }
+
+    input::placeholder {
+      color: b.$form-font-color;
+    }
+
+    input:focus {
+      outline: 1px solid #fff;
+    }
+
+    input.incomplete:focus {
+      outline: 1px solid b.$error-color;
+    }
+
+    .label {
+      display: block;
+      font-size: b.$creditcard-bodytext-size;
+    }
+
+    .success {
+      color: b.$success-color;
+      padding: 0.6rem;
+      margin-top: auto;
+      display: inline-flex;
+      justify-content: center;
+      align-items: baseline;
+      opacity: 0;
+      visibility: hidden;
+
+      img {
+        height: calc(0.7rem + 0.5vw + 0.5vh);
+        width: calc(0.7rem + 0.5vw + 0.5vh);
+      }
+    }
+
+    .error {
+      color: b.$error-color;
+      display: block;
+      font-size: b.$error-font-size;
+      font-weight: 200;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .shown {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .line_one input,
+  .line_two input {
+    width: 95%;
+  }
+
+  .line_three {
+    display: flex;
+    flex-direction: row;
+    @media only screen and (max-width: 500px) {
+      flex-direction: column;
+    }
+
+    .column_one {
+      margin-right: calc(1rem + 1vw);
+      @media only screen and (max-width: 500px) {
+        margin-right: 0;
+      }
+    }
+
+    .column_two {
+      @media only screen and (max-width: 500px) {
+        margin-top: calc(0.8rem + 0.3vw + 0.5vh);
+      }
+    }
+  }
+
+  .line_three {
+    .column_one input {
+      width: 50%;
+    }
+
+    .column_two input {
+      width: 40%;
+    }
+  }
+
+  .line_four {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .submit_btn {
+      background-color: b.$buttons-bg;
+      color: b.$main-font-color;
+      text-transform: uppercase;
+      font-size: calc(0.7rem + 0.5vw + 1.7vh);
+      font-weight: 700;
+      padding: 0.6rem 2.5rem;
+      margin-top: calc(1.5rem + 2vh);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+}

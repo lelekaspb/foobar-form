@@ -1,0 +1,55 @@
+@use "../base" as b;
+
+.Landing {
+  display: flex;
+  flex-direction: column;
+  color: b.$main-font-color;
+  background-color: b.$bg-color;
+  width: 100vw;
+  height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  // gradient text for the word "beer"
+  span {
+    background-color: #fff;
+    background-image: linear-gradient(90deg, #fff, b.$bg-color);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+}
+
+.lure {
+  display: flex;
+  place-items: center;
+  img {
+    height: 53vh;
+    width: auto;
+  }
+}
+
+h1 {
+  font-size: 80px;
+  text-align: left;
+  margin-right: calc(-15px - 1.5vw);
+}
+
+@media screen and (max-width: 1000px) {
+  .lure img {
+    height: calc(24vh + 22vw);
+  }
+
+  h1 {
+    font-size: calc(2vh + 6.5vw);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 9vw;
+    margin-right: calc(-10px - 2vw);
+  }
+}

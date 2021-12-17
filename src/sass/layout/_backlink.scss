@@ -1,0 +1,17 @@
+@use "../base" as b;
+
+.Backlink {
+  margin: calc(0.5rem + 0.5vw + 2vh) 0;
+
+  .link {
+    font-size: b.$backlink-font-size;
+    text-decoration: none;
+    color: b.$main-font-color;
+    cursor: pointer;
+
+    img {
+      max-width: 0.7rem;
+      margin-right: 0.4rem;
+    }
+  }
+}

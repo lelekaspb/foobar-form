@@ -1,0 +1,147 @@
+@use "../base" as b;
+
+@mixin flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Styling Order Now button
+
+.order-now {
+  @include flex;
+  border-radius: 15px;
+  height: 70px;
+  width: 300px;
+  margin-bottom: 3.5rem;
+  background-color: b.$landing-button-bg;
+  font-size: 34px;
+  font-weight: 700;
+  text-decoration: none;
+  color: b.$bg-color;
+}
+
+@media screen and (max-width: 370px) {
+  .order-now {
+    width: 81vw;
+    height: calc(2rem + 10vw);
+    font-size: calc(8px + 7vw);
+  }
+}
+
+// Styling Plus and Minus buttons
+
+@mixin plus-minus {
+  @include flex;
+  border: none;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  background-color: b.$plus-minus-bg;
+  box-shadow: 0px 0px 3px 1px #000;
+}
+
+.plusMinus button {
+  @include plus-minus;
+}
+
+@mixin minus {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 5px;
+  background-color: b.$plus-minus-color;
+  border-radius: 5px;
+}
+
+.plusMinus button::before {
+  @include minus;
+}
+
+.plusMinus button:nth-of-type(1)::after {
+  @include minus;
+  transform: rotate(90deg);
+}
+
+// Styling Close modal button
+
+.closeModal button {
+  @include plus-minus;
+  transform: rotate(45deg);
+}
+
+.closeModal button::before {
+  @include minus;
+}
+
+.closeModal button::after {
+  @include minus;
+  transform: rotate(90deg);
+}
+
+// Styling About button
+
+.about {
+  border: none;
+  background: none;
+  color: b.$main-font-color;
+  font-size: 20px;
+  margin-top: 0.4rem;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-thickness: from-font;
+  letter-spacing: 0.3px;
+}
+
+// Styling Payment methods icons
+
+.methods {
+  border: none;
+  @include flex;
+  box-shadow: 0px 0px 4px 2px #000;
+  border-radius: 20px;
+  background-color: b.$buttons-bg;
+  width: 350px;
+  height: 180px;
+  img {
+    width: 80%;
+    height: 100%;
+  }
+}
+
+.chosenMethod {
+  background-color: b.$chosen-method-bg;
+}
+
+@media screen and (max-width: 850px) {
+  .methods {
+    width: 41vw;
+    height: calc(4vh + 17.5vw);
+    border-radius: 2.5vw;
+  }
+}
+
+// Styling Pay button
+
+.pay {
+  border: none;
+  box-shadow: 0px 0px 4px 2px #000;
+  border-radius: 10px;
+  background-color: b.$buttons-bg;
+  color: b.$main-font-color;
+  width: 300px;
+  height: 75px;
+  text-transform: uppercase;
+  font-size: 40px;
+  font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 400px) {
+  .pay {
+    width: 75vw;
+    height: calc(2.2rem + 10vw);
+    font-size: calc(16px + 6vw);
+  }
+}

@@ -1,0 +1,10 @@
+.Header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+
+  img {
+    width: calc(20vw + 10vh);
+  }
+}
