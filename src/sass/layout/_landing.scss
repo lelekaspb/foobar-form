@@ -29,12 +29,11 @@
     height: 53vh;
     width: auto;
   }
-}
-
-h1 {
-  font-size: 80px;
-  text-align: left;
-  margin-right: calc(-15px - 1.5vw);
+  h1 {
+    font-size: 80px;
+    text-align: left;
+    margin-right: calc(-15px - 1.5vw);
+  }
 }
 
 @media screen and (max-width: 1000px) {
