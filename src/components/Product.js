@@ -6,7 +6,6 @@ export default function Product(props) {
     const ordered = JSON.parse(localStorage.getItem("order"));
     if (ordered) {
       const item = ordered.find((item) => item.name === props.name);
-      console.log(item);
       if (item) {
         return item.amount;
       } else {
@@ -44,7 +43,7 @@ export default function Product(props) {
     });
     // Calling functions to add beers to the cart
     if (amount < 99) {
-      props.addBeersToTotalPrice();
+      //props.addBeersToTotalPrice();
       props.addToCart({
         name: props.name,
       });
@@ -61,7 +60,7 @@ export default function Product(props) {
     });
     // Calling functions to remove beers from the cart
     if (amount > 0) {
-      props.removeBeersFromTotalPrice();
+      //props.removeBeersFromTotalPrice();
       props.removeFromCart({
         name: props.name,
       });

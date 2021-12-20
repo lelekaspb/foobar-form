@@ -18,7 +18,7 @@ export default function Main() {
   };
 
   const [products, setProducts] = useState([]);
-  const [totalPriceBeers, setTotalPriceBeers] = useState(0);
+  //const [totalPriceBeers, setTotalPriceBeers] = useState(0);
   const [cartItems, setCartItems] = useState(getCartItems());
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -52,18 +52,18 @@ export default function Main() {
   }
 
   // Incrementing the number of beers in the cart
-  function addBeersToTotalPrice() {
-    setTotalPriceBeers((oldTotalPriceBeers) => {
-      return oldTotalPriceBeers + 1;
-    });
-  }
+  // function addBeersToTotalPrice() {
+  //   setTotalPriceBeers((oldTotalPriceBeers) => {
+  //     return oldTotalPriceBeers + 1;
+  //   });
+  // }
 
   // Decrementing the number of beers in the cart
-  function removeBeersFromTotalPrice() {
-    setTotalPriceBeers((oldTotalPriceBeers) => {
-      return oldTotalPriceBeers - 1;
-    });
-  }
+  // function removeBeersFromTotalPrice() {
+  //   setTotalPriceBeers((oldTotalPriceBeers) => {
+  //     return oldTotalPriceBeers - 1;
+  //   });
+  // }
 
   // Adding beers to the cart
   function addToCart(productToAdd) {
@@ -71,9 +71,7 @@ export default function Main() {
       setErrorMessage("");
     }
     setCartItems((oldCartItems) => {
-      console.log(oldCartItems);
       const newCartItems = oldCartItems.concat(productToAdd);
-      console.log(newCartItems);
       return newCartItems;
     });
   }
@@ -106,12 +104,12 @@ export default function Main() {
       <img className="mainLogo" src="icons/foobar-logo.svg" alt="Foobar logo" />
       <ProductList
         products={products}
-        addBeersToTotalPrice={addBeersToTotalPrice}
-        removeBeersFromTotalPrice={removeBeersFromTotalPrice}
+        // addBeersToTotalPrice={addBeersToTotalPrice}
+        // removeBeersFromTotalPrice={removeBeersFromTotalPrice}
         addToCart={addToCart}
         removeFromCart={removeFromCart}
       />
-      <TotalPrice totalPriceBeers={totalPriceBeers} />
+      <TotalPrice totalPriceBeers={cartItems.length * 80} />
       <PaymentMethod
         cartItems={cartItems}
         setErrorMessage={setErrorMessage}
