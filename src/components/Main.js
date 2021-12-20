@@ -4,9 +4,22 @@ import TotalPrice from "./TotalPrice";
 import PaymentMethod from "./PaymentMethod";
 
 export default function Main() {
+  const getCartItems = () => {
+    const order = JSON.parse(localStorage.getItem("order"));
+    const cartItems = [];
+    if (order) {
+      order.forEach((beer) => {
+        for (let a = 1; a <= beer.amount; a++) {
+          cartItems.push({ name: beer.name });
+        }
+      });
+    }
+    return cartItems;
+  };
+
   const [products, setProducts] = useState([]);
   const [totalPriceBeers, setTotalPriceBeers] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(getCartItems());
   const [errorMessage, setErrorMessage] = useState("");
 
   // Fetching data
@@ -29,9 +42,11 @@ export default function Main() {
   function checkTaps(data) {
     setProducts((oldProducts) => {
       const beersOnTap = data.taps.map((tap) => tap.beer);
-      console.log("Beers on tap:", beersOnTap);
-      const newProducts = oldProducts.filter((beer) => beersOnTap.includes(beer.name));
-      console.log("Available beers:", newProducts);
+      //console.log("Beers on tap:", beersOnTap);
+      const newProducts = oldProducts.filter((beer) =>
+        beersOnTap.includes(beer.name)
+      );
+      //    console.log("Available beers:", newProducts);
       return newProducts;
     });
   }
@@ -56,28 +71,35 @@ export default function Main() {
       setErrorMessage("");
     }
     setCartItems((oldCartItems) => {
+      console.log(oldCartItems);
       const newCartItems = oldCartItems.concat(productToAdd);
+      console.log(newCartItems);
       return newCartItems;
     });
   }
 
   //Removing beers from the cart
   function removeFromCart(productToRemove) {
-    const indexOfFirstUnwantedItem = cartItems.findIndex((item) => item.name === productToRemove.name);
+    const indexOfFirstUnwantedItem = cartItems.findIndex(
+      (item) => item.name === productToRemove.name
+    );
 
     console.log("Index of first unwanted item:", indexOfFirstUnwantedItem);
 
     // Creating two arrays: one before the item we want to remove, and one after it
 
     const firstPart = cartItems.slice(0, indexOfFirstUnwantedItem);
-    const lastPart = cartItems.slice(indexOfFirstUnwantedItem + 1, cartItems.length);
+    const lastPart = cartItems.slice(
+      indexOfFirstUnwantedItem + 1,
+      cartItems.length
+    );
 
     // Merging two arrays into one, that will not include the unwanted item
 
     setCartItems([...firstPart, ...lastPart]);
   }
 
-  console.log("Items in cart:", cartItems);
+  // console.log("Items in cart:", cartItems);
 
   return (
     <div className="Main">
@@ -90,7 +112,11 @@ export default function Main() {
         removeFromCart={removeFromCart}
       />
       <TotalPrice totalPriceBeers={totalPriceBeers} />
-      <PaymentMethod cartItems={cartItems} setErrorMessage={setErrorMessage} errorMessage={errorMessage} />
+      <PaymentMethod
+        cartItems={cartItems}
+        setErrorMessage={setErrorMessage}
+        errorMessage={errorMessage}
+      />
     </div>
   );
 }

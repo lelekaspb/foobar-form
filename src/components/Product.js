@@ -2,7 +2,25 @@ import { useState } from "react";
 import Popup from "./Popup";
 
 export default function Product(props) {
-  const [amount, setAmount] = useState(0);
+  const getAmount = () => {
+    const ordered = JSON.parse(localStorage.getItem("order"));
+    if (ordered) {
+      const item = ordered.find((item) => item.name === props.name);
+      console.log(item);
+      if (item) {
+        return item.amount;
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
+    }
+  };
+
+  // const initAmount = ordered.amount || 0;
+  const initAmount = getAmount();
+
+  const [amount, setAmount] = useState(initAmount);
   const [popupOpen, setPopupOpen] = useState(false);
 
   // Toggling pop up window
