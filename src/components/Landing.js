@@ -1,6 +1,12 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Landing() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log(navigate);
+  }, [navigate]);
+
   return (
     <div className="Landing">
       <img className="mainLogo" src="icons/foobar-logo.svg" alt="Foobar logo" />

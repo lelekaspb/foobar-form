@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Backlink() {
+  let navigate = useNavigate();
   return (
     <div className="Backlink">
       <Link className="link" to="/beers">
