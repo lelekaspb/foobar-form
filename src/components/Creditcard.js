@@ -57,7 +57,6 @@ function Creditcard() {
   const cardExpiryRef = useRef("");
   const cardCvcRef = useRef("");
   const cardNameRef = useRef("");
-  const submitButton = useRef("");
 
   // useEffect functions are used for changing focus from one input to another
   useEffect(() => {
@@ -77,6 +76,13 @@ function Creditcard() {
       document.activeElement.blur();
     }
   }, [state.cvc]);
+
+  // for hiding error message under the name field
+  useEffect(() => {
+    if (state.name.length > 2) {
+      dispatch({ type: "nameErr", data: false });
+    }
+  }, [state.name]);
 
   // change state of card number input based on input value
   const handleNumberInput = (e) => {
@@ -303,12 +309,7 @@ function Creditcard() {
 
           {/* submit button starts here*/}
           <div className="line line_four">
-            <button
-              className="submit_btn"
-              type="submit"
-              ref={submitButton}
-              onClick={handleSubmit}
-            >
+            <button className="submit_btn" type="submit" onClick={handleSubmit}>
               order
             </button>
           </div>
