@@ -1,6 +1,6 @@
 import Backlink from "./Backlink";
 import { postOrder } from "./../utilities/post.js";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Mobilepay(props) {
   let navigate = useNavigate();
@@ -25,9 +25,7 @@ function Mobilepay(props) {
         <Backlink />
         <h1>payment</h1>
         <div className="picture">
-          <Link to="/">
-            <img src="images/qr-code.png" alt="qr code" onClick={handleClick} />
-          </Link>
+          <img src="images/qr-code.png" alt="qr code" onClick={handleClick} />
         </div>
       </main>
     </section>

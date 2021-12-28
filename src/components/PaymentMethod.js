@@ -1,45 +1,37 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ErrorMessage from "./ErrorMessage";
 
 export default function PaymentMethod({
   cartItems,
-  errorMessage,
-  setErrorMessage,
   buildOrder,
+  error,
+  setError,
 }) {
-  const [chosen, setChosen] = useState("");
-  const [creditCardClass, setCreditCardClass] = useState("methods");
-  const [mobilePayClass, setMobilePayClass] = useState("methods");
+  const [payment, setPayment] = useState("");
 
-  // Updating the state of chosen payment method
-  function chosenMethod(method) {
-    if (cartItems.length === 0) {
-      setErrorMessage("You need to select the beers");
-    } else {
-      console.log("Chosen payment method is:", method);
-      setChosen(method);
-      setErrorMessage("");
+  let navigate = useNavigate();
+  const redirectToPayment = () => {
+    navigate(`/${payment}`);
+  };
 
-      // Styling payment methods buttons
-      if (method === "/creditcard") {
-        setCreditCardClass("methods chosenMethod");
-        setMobilePayClass("methods");
-      }
-      if (method === "/mobilepay") {
-        setMobilePayClass("methods chosenMethod");
-        setCreditCardClass("methods");
-      }
+  useEffect(() => {
+    if (payment !== "") {
+      setError({ ...error, payment: false });
     }
-  }
+  }, [payment]);
 
   // Checking if there are beers in the cart and if a payment method selected
   function pay() {
     if (cartItems.length === 0) {
-      setErrorMessage("You need to select the beers");
-    } else if (chosen === "") {
-      setErrorMessage("You need to choose a payment method");
+      console.log("error: no items in the cart");
+      setError({ ...error, cart: true });
+    } else if (payment === "") {
+      console.log("error: no payment method selected");
+      setError({ ...error, payment: true });
     } else {
       buildOrder();
+      redirectToPayment();
     }
   }
 
@@ -48,26 +40,36 @@ export default function PaymentMethod({
       <p>Please choose a payment method</p>
       <section>
         <button
-          className={creditCardClass}
-          onClick={() => chosenMethod("/creditcard")}
+          className={`methods ${
+            payment === "Creditcard" ? "chosenMethod" : ""
+          }`}
+          onClick={() => {
+            setPayment("Creditcard");
+          }}
         >
           <img src="icons/creditcard-logo.svg" alt="Credit card icon" />
         </button>
         <button
-          className={mobilePayClass}
-          onClick={() => chosenMethod("/mobilepay")}
+          className={`methods ${payment === "Mobilepay" ? "chosenMethod" : ""}`}
+          onClick={() => {
+            setPayment("Mobilepay");
+          }}
         >
           <img src="icons/mobilepay-logo.svg" alt="Mobile pay icon" />
         </button>
       </section>
-      <p>{errorMessage}</p>
+      {/* <p>{errorMessage}</p> */}
+      <ErrorMessage
+        text={
+          error.cart ? "Please select a beer" : "Please select payment method"
+        }
+        show={error.cart || error.payment ? true : false}
+      />
 
       <nav>
-        <Link to={chosen}>
-          <button className="pay" onClick={pay}>
-            Pay
-          </button>
-        </Link>
+        <button className="pay" onClick={pay}>
+          Pay
+        </button>
       </nav>
     </article>
   );

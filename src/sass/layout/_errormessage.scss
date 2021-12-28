@@ -1,0 +1,21 @@
+@use "../base" as b;
+
+.error {
+  color: b.$error-color;
+  display: block;
+  font-size: b.$error-font-size;
+  font-weight: 200;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.shown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.Main .error {
+  // font-size: 25px;
+  font-size: calc(0.7rem + 0.5vw + 0.5vh);
+  margin: 3rem 1rem;
+}

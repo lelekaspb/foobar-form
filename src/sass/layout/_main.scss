@@ -76,12 +76,6 @@ $font-weight: 400;
     gap: 8vw;
     margin-inline: 1rem;
   }
-  p:nth-of-type(2) {
-    font-size: 20px;
-    height: 25px;
-    text-align: center;
-    color: b.$error-text-color;
-  }
 }
 
 @media screen and (max-width: 950px) {
@@ -136,8 +130,5 @@ $font-weight: 400;
 
   .PaymentMethod {
     padding-bottom: 16vw;
-    p:nth-of-type(2) {
-      font-size: calc(11px + 1.8vw);
-    }
   }
 }
