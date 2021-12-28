@@ -1,17 +1,17 @@
 import Header from "./Header";
 import Backlink from "./Backlink";
-import SuccessMessage from "./SuccessMessage";
-import ErrorMessage from "./ErrorMessage";
-import MaskedInput from "react-text-mask";
 import { useRef, useEffect, useReducer } from "react";
 import { postOrder } from "./../utilities/post.js";
 import { useNavigate } from "react-router-dom";
+import Cardcvc from "./Cardcvc";
+import Cardexpiry from "./Cardexpiry";
+import Cardname from "./Cardname";
+import Cardnumber from "./Cardnumber";
 
 function Creditcard() {
   // for redirecting users to the confirmation component after posting their order
   let navigate = useNavigate();
   const redirectToConfirmation = () => {
-    console.log("redirectToConfirmation");
     navigate("/confirmation");
   };
 
@@ -67,6 +67,7 @@ function Creditcard() {
 
   useEffect(() => {
     if (state.expiry.length === 5) {
+      console.log(cardCvcRef);
       cardCvcRef.current.focus();
     }
   }, [state.expiry]);
@@ -86,7 +87,6 @@ function Creditcard() {
 
   // change state of card number input based on input value
   const handleNumberInput = (e) => {
-    //setNumber(e.target.value);
     dispatch({ type: "number", data: e.target.value });
   };
 
@@ -165,155 +165,58 @@ function Creditcard() {
         <Backlink />
         <h1>payment</h1>
         <form>
-          {/* card number input field starts here*/}
+          {/* card number input field */}
           <div className="line line_one">
-            <label
-              htmlFor="card-number"
+            <Cardnumber
+              number={state.number}
+              err={state.numberErr}
               ref={cardNumberRef}
-              className="label number"
-            >
-              Card number
-            </label>
-            <div className="input_wrapper">
-              <MaskedInput
-                mask={[
-                  /[1-9]/,
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  " ",
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  " ",
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  " ",
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                  /\d/,
-                ]}
-                autoFocus
-                className={`form-control ${
-                  state.numberErr ? "incomplete" : ""
-                }`}
-                placeholder="1234 5678 9012 3456"
-                guide={false}
-                value={state.number}
-                id="card-number"
-                name="number"
-                inputMode="numeric"
-                onChange={handleNumberInput}
-                onBlur={handleNumberBlur}
-              />
-              <SuccessMessage show={state.number.length === 19} />
-            </div>
-            <ErrorMessage
-              text={"Credit card number must be 16 digits"}
-              show={state.numberErr}
+              handleNumberInput={handleNumberInput}
+              handleNumberBlur={handleNumberBlur}
             />
           </div>
-          {/* card number input field ends here*/}
 
-          {/* cardholder name input field starts here*/}
+          {/* cardholder name input field*/}
           <div className="line line_two">
-            <label htmlFor="card-name" className="label name">
-              Name on card
-            </label>
-            <div className="input_wrapper">
-              <input
-                type="text"
-                name="name"
-                className={`${state.nameErr ? "incomplete" : ""}`}
-                id="card-name"
-                placeholder="John Doe"
-                ref={cardNameRef}
-                value={state.name}
-                onChange={handleNameInput}
-                onBlur={handleNameBlur}
-              />
-              <SuccessMessage show={state.name.length > 2} />
-            </div>
-            <ErrorMessage
-              text={"Please enter your name"}
-              show={state.nameErr}
+            <Cardname
+              name={state.name}
+              err={state.nameErr}
+              ref={cardNameRef}
+              handleNameInput={handleNameInput}
+              handleNameBlur={handleNameBlur}
             />
           </div>
-          {/* cardholder name input field ends here*/}
 
           <div className="line line_three">
-            {/* card expiry input field starts here*/}
+            {/* card expiry input field */}
             <div className="column_one">
-              <label
-                htmlFor="card-expiry"
-                className="label expiry"
+              <Cardexpiry
+                expiry={state.expiry}
+                err={state.expiryErr}
                 ref={cardExpiryRef}
-              >
-                Expiry date
-              </label>
-              <div className="input_wrapper">
-                <MaskedInput
-                  mask={[/[0-9]/, /\d/, "/", /\d/, /\d/]}
-                  className={`form-control ${
-                    state.expiryErr ? "incomplete" : ""
-                  }`}
-                  placeholder="04/23"
-                  guide={false}
-                  value={state.expiry}
-                  id="card-expiry"
-                  name="name"
-                  inputMode="numeric"
-                  onChange={handleExpiryInput}
-                  onBlur={handleExpiryBlur}
-                />
-                <SuccessMessage show={state.expiry.length === 5} />
-              </div>
-              <ErrorMessage
-                text={"Expiry date must be 4 digits"}
-                show={state.expiryErr}
+                handleExpiryInput={handleExpiryInput}
+                handleExpiryBlur={handleExpiryBlur}
               />
             </div>
-            {/* card expiry input field ends here*/}
 
-            {/* security code input field starts here*/}
+            {/* security code input field */}
             <div className="column_two">
-              <label htmlFor="card-cvc" className="label cvc" ref={cardCvcRef}>
-                Security code
-              </label>
-              <div className="input_wrapper">
-                <MaskedInput
-                  mask={[/[0-9]/, /\d/, /\d/, /\d/]}
-                  className={`form-control ${state.cvcErr ? "incomplete" : ""}`}
-                  placeholder="123"
-                  guide={false}
-                  value={state.cvc}
-                  id="card-cvc"
-                  name="cvc"
-                  inputMode="numeric"
-                  onChange={handleCvcInput}
-                  onBlur={handleCvcBlur}
-                />
-                <SuccessMessage show={state.cvc.length === 3} />
-              </div>
-              <ErrorMessage
-                text={"Security code must be 3 digits"}
-                show={state.cvcErr}
+              <Cardcvc
+                cvc={state.cvc}
+                err={state.cvcErr}
+                ref={cardCvcRef}
+                handleCvcInput={handleCvcInput}
+                handleCvcBlur={handleCvcBlur}
               />
             </div>
-            {/* security code input field ends here*/}
           </div>
 
-          {/* submit button starts here*/}
+          {/* submit button */}
           <div className="line line_four">
             <button className="submit_btn" type="submit" onClick={handleSubmit}>
               order
             </button>
           </div>
-          {/* submit button ends here*/}
         </form>
       </main>
     </section>
