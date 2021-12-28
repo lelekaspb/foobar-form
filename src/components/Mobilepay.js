@@ -9,9 +9,9 @@ function Mobilepay(props) {
   };
 
   const handleClick = async () => {
-    const resp = await postOrder(props.order);
+    const resp = await postOrder(props.order.items);
     if (resp) {
-      props.setOrderID(resp.id);
+      props.setOrder({ ...props.order, id: resp.id });
       redirectToConfirmation();
     } else {
       alert("failed to post");

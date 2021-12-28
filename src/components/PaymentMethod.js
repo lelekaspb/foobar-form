@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 
@@ -14,12 +14,6 @@ export default function PaymentMethod({
   const redirectToPayment = () => {
     navigate(`/${payment}`);
   };
-
-  useEffect(() => {
-    if (payment !== "") {
-      setError({ ...error, payment: false });
-    }
-  }, [payment]);
 
   // Checking if there are beers in the cart and if a payment method selected
   function pay() {
@@ -45,6 +39,7 @@ export default function PaymentMethod({
           }`}
           onClick={() => {
             setPayment("Creditcard");
+            setError({ ...error, payment: false });
           }}
         >
           <img src="icons/creditcard-logo.svg" alt="Credit card icon" />
@@ -53,6 +48,7 @@ export default function PaymentMethod({
           className={`methods ${payment === "Mobilepay" ? "chosenMethod" : ""}`}
           onClick={() => {
             setPayment("Mobilepay");
+            setError({ ...error, payment: false });
           }}
         >
           <img src="icons/mobilepay-logo.svg" alt="Mobile pay icon" />

@@ -1,0 +1,4 @@
+to do:
+ - make beer pictures and plus minus smaller (at least on small screeens),
+ - make the order now button smaller on small screeens
+ - merge order and orderID states +

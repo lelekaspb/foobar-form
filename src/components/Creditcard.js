@@ -148,9 +148,9 @@ function Creditcard(props) {
     const errorField = checkForErrors();
     if (!errorField) {
       // if all input fields are filled in correctly, post order and redirect the user to the confirmation page(component)
-      const resp = await postOrder(props.order);
+      const resp = await postOrder(props.order.items);
       if (resp) {
-        props.setOrderID(resp.id);
+        props.setOrder({ ...props.order, id: resp.id });
         redirectToConfirmation();
       } else {
         alert("failed to post");

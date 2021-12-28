@@ -10,8 +10,12 @@ import { useState, useEffect } from "react";
 function App() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [order, setOrder] = useState("");
-  const [orderID, setOrderID] = useState("");
+  const [order, setOrder] = useState({ items: "", id: "" });
+  // const [orderID, setOrderID] = useState("");
+
+  useEffect(() => {
+    console.log(order);
+  }, [order]);
 
   // Fetching data
   useEffect(() => {
@@ -58,7 +62,7 @@ function App() {
   function buildOrder() {
     const counts = [];
     const uniqueBeers = [];
-    const order = [];
+    const ordered = [];
 
     // Counting how many beers of each type is in the order
     cartItems.forEach((item) => {
@@ -73,16 +77,16 @@ function App() {
     // Building the order for posting
     uniqueBeers.forEach((elem) => {
       const oneBeerType = { name: elem.name, amount: counts[elem.name] };
-      order.push(oneBeerType);
+      ordered.push(oneBeerType);
     });
 
-    // set order states
-    setOrder(order);
+    // set order state
+    setOrder({ ...order, items: ordered });
   }
 
   const clearState = () => {
-    setOrderID("");
-    setOrder("");
+    //setOrderID("");
+    setOrder({ items: "", id: "" });
     setCartItems([]);
   };
 
@@ -107,18 +111,18 @@ function App() {
           />
           <Route
             path="/creditcard"
-            element={<Creditcard order={order} setOrderID={setOrderID} />}
+            element={<Creditcard order={order} setOrder={setOrder} />}
           />
           <Route
             path="/mobilepay"
-            element={<Mobilepay order={order} setOrderID={setOrderID} />}
+            element={<Mobilepay order={order} setOrder={setOrder} />}
           />
           <Route
             path="/confirmation"
             element={
               <Confirmation
-                order={order}
-                id={orderID}
+                order={order.items}
+                id={order.id}
                 clearState={clearState}
               />
             }
