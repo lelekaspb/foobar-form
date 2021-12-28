@@ -1,4 +1,3 @@
-import Header from "./Header";
 import Backlink from "./Backlink";
 import { useRef, useEffect, useReducer } from "react";
 import { postOrder } from "./../utilities/post.js";
@@ -8,7 +7,7 @@ import Cardexpiry from "./Cardexpiry";
 import Cardname from "./Cardname";
 import Cardnumber from "./Cardnumber";
 
-function Creditcard() {
+function Creditcard(props) {
   // for redirecting users to the confirmation component after posting their order
   let navigate = useNavigate();
   const redirectToConfirmation = () => {
@@ -67,7 +66,6 @@ function Creditcard() {
 
   useEffect(() => {
     if (state.expiry.length === 5) {
-      console.log(cardCvcRef);
       cardCvcRef.current.focus();
     }
   }, [state.expiry]);
@@ -150,8 +148,13 @@ function Creditcard() {
     const errorField = checkForErrors();
     if (!errorField) {
       // if all input fields are filled in correctly, post order and redirect the user to the confirmation page(component)
-      await postOrder();
-      redirectToConfirmation();
+      const resp = await postOrder(props.order);
+      if (resp) {
+        props.setOrderID(resp.id);
+        redirectToConfirmation();
+      } else {
+        alert("failed to post");
+      }
     } else {
       // if there is an error in input values, change focus to the incorrectly filled in input field
       focusOnError(errorField);
@@ -160,7 +163,7 @@ function Creditcard() {
 
   return (
     <section className="Creditcard">
-      <Header />
+      {/* <Header /> */}
       <main>
         <Backlink />
         <h1>payment</h1>

@@ -2,7 +2,16 @@ import { useState } from "react";
 import Popup from "./Popup";
 
 export default function Product(props) {
-  const [amount, setAmount] = useState(0);
+  const getInitialAmount = () => {
+    const temp = props.cartItems.filter((item) => item.name === props.name);
+    if (temp.length) {
+      return temp.length;
+    } else {
+      return 0;
+    }
+  };
+
+  const [amount, setAmount] = useState(getInitialAmount());
   const [popupOpen, setPopupOpen] = useState(false);
 
   // Toggling pop up window
@@ -26,7 +35,6 @@ export default function Product(props) {
     });
     // Calling functions to add beers to the cart
     if (amount < 99) {
-      props.addBeersToTotalPrice();
       props.addToCart({
         name: props.name,
       });
@@ -43,7 +51,6 @@ export default function Product(props) {
     });
     // Calling functions to remove beers from the cart
     if (amount > 0) {
-      props.removeBeersFromTotalPrice();
       props.removeFromCart({
         name: props.name,
       });

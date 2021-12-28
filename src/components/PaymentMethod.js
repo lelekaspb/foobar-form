@@ -1,36 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function PaymentMethod({ cartItems, errorMessage, setErrorMessage }) {
+export default function PaymentMethod({
+  cartItems,
+  errorMessage,
+  setErrorMessage,
+  buildOrder,
+}) {
   const [chosen, setChosen] = useState("");
   const [creditCardClass, setCreditCardClass] = useState("methods");
   const [mobilePayClass, setMobilePayClass] = useState("methods");
-
-  function buildOrder() {
-    const counts = [];
-    const uniqueBeers = [];
-    const order = [];
-
-    // Counting how many beers of each type is in the order
-    cartItems.forEach((item) => {
-      counts[item.name] = (counts[item.name] || 0) + 1;
-
-      // Adding unique beers to an array
-      if (counts[item.name] === 1) {
-        uniqueBeers.push(item);
-      }
-    });
-
-    // Building the order for posting
-    uniqueBeers.forEach((elem) => {
-      const oneBeerType = { name: elem.name, amount: counts[elem.name] };
-      order.push(oneBeerType);
-    });
-    console.log("order", order);
-
-    // Adding order to local storage
-    localStorage.setItem("order", JSON.stringify(order));
-  }
 
   // Updating the state of chosen payment method
   function chosenMethod(method) {
@@ -68,10 +47,16 @@ export default function PaymentMethod({ cartItems, errorMessage, setErrorMessage
     <article className="PaymentMethod">
       <p>Please choose a payment method</p>
       <section>
-        <button className={creditCardClass} onClick={() => chosenMethod("/creditcard")}>
+        <button
+          className={creditCardClass}
+          onClick={() => chosenMethod("/creditcard")}
+        >
           <img src="icons/creditcard-logo.svg" alt="Credit card icon" />
         </button>
-        <button className={mobilePayClass} onClick={() => chosenMethod("/mobilepay")}>
+        <button
+          className={mobilePayClass}
+          onClick={() => chosenMethod("/mobilepay")}
+        >
           <img src="icons/mobilepay-logo.svg" alt="Mobile pay icon" />
         </button>
       </section>

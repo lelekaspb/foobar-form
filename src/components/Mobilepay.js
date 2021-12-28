@@ -1,23 +1,26 @@
-import Header from "./Header";
 import Backlink from "./Backlink";
 import { postOrder } from "./../utilities/post.js";
 import { Link, useNavigate } from "react-router-dom";
 
-function Mobilepay() {
+function Mobilepay(props) {
   let navigate = useNavigate();
   const redirectToConfirmation = () => {
-    console.log("redirectToConfirmation");
     navigate("/confirmation");
   };
 
   const handleClick = async () => {
-    await postOrder();
-    redirectToConfirmation();
+    const resp = await postOrder(props.order);
+    if (resp) {
+      props.setOrderID(resp.id);
+      redirectToConfirmation();
+    } else {
+      alert("failed to post");
+    }
   };
 
   return (
     <section className="Mobilepay">
-      <Header />
+      {/* <Header /> */}
       <main>
         <Backlink />
         <h1>payment</h1>
