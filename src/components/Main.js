@@ -1,6 +1,7 @@
 import ProductList from "./ProductList";
 import TotalPrice from "./TotalPrice";
 import PaymentMethod from "./PaymentMethod";
+import Header from "./Header";
 import { useState } from "react";
 
 export default function Main(props) {
@@ -22,6 +23,7 @@ export default function Main(props) {
 
   return (
     <div className="Main">
+      <Header />
       <ProductList
         products={props.products}
         cartItems={props.cartItems}

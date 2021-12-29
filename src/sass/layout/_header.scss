@@ -5,6 +5,10 @@
   margin-top: 0;
 
   img {
-    width: calc(20vw + 10vh);
+    width: calc(17rem + 6vw + 7vh);
+    @media screen and (max-width: 600px) {
+      width: 66.5vw;
+      height: 19vw;
+    }
   }
 }

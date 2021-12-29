@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 function Confirmation(props) {
   let navigate = useNavigate();
@@ -20,6 +21,7 @@ function Confirmation(props) {
 
   return (
     <section className="Confirmation">
+      <Header />
       <main>
         <div className="message">
           <h1>Thank you!</h1>

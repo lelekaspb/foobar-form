@@ -1,4 +1,5 @@
 import Backlink from "./Backlink";
+import Header from "./Header";
 import { useRef, useEffect, useReducer } from "react";
 import { postOrder } from "./../utilities/post.js";
 import { useNavigate } from "react-router-dom";
@@ -163,7 +164,7 @@ function Creditcard(props) {
 
   return (
     <section className="Creditcard">
-      {/* <Header /> */}
+      <Header />
       <main>
         <Backlink />
         <h1>payment</h1>

@@ -92,7 +92,6 @@ function App() {
 
   return (
     <>
-      <Header />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />

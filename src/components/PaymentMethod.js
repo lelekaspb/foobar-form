@@ -57,7 +57,9 @@ export default function PaymentMethod({
       {/* <p>{errorMessage}</p> */}
       <ErrorMessage
         text={
-          error.cart ? "Please select a beer" : "Please select payment method"
+          error.cart
+            ? "You need to select at least one beer"
+            : "Please select payment method"
         }
         show={error.cart || error.payment ? true : false}
       />

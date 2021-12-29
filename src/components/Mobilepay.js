@@ -1,4 +1,5 @@
 import Backlink from "./Backlink";
+import Header from "./Header";
 import { postOrder } from "./../utilities/post.js";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +21,7 @@ function Mobilepay(props) {
 
   return (
     <section className="Mobilepay">
-      {/* <Header /> */}
+      <Header />
       <main>
         <Backlink />
         <h1>payment</h1>
