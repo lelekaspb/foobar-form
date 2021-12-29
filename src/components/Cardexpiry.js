@@ -14,6 +14,7 @@ const Cardexpiry = forwardRef((props, forwardedRef) => {
           mask={[/[0-9]/, /\d/, "/", /\d/, /\d/]}
           className={`form-control ${props.err ? "incomplete" : ""}`}
           placeholder="04/23"
+          autoComplete={props.windowDimensions.width < 600 ? "cc-exp" : "off"}
           guide={false}
           value={props.expiry}
           id="card-expiry"

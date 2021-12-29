@@ -14,6 +14,7 @@ const Cardcvc = forwardRef((props, forwardedRef) => {
           mask={[/[0-9]/, /\d/, /\d/, /\d/]}
           className={`form-control ${props.err ? "incomplete" : ""}`}
           placeholder="123"
+          autoComplete={props.windowDimensions.width < 600 ? "cc-csc" : "off"}
           guide={false}
           value={props.cvc}
           id="card-cvc"

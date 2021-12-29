@@ -35,6 +35,9 @@ const Cardnumber = forwardRef((props, forwardedRef) => {
           autoFocus
           className={`form-control ${props.err ? "incomplete" : ""}`}
           placeholder="1234 5678 9012 3456"
+          autoComplete={
+            props.windowDimensions.width < 600 ? "cc-number" : "off"
+          }
           guide={false}
           value={props.number}
           id="card-number"

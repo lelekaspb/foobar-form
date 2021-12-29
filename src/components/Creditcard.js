@@ -1,6 +1,6 @@
 import Backlink from "./Backlink";
 import Header from "./Header";
-import { useRef, useEffect, useReducer } from "react";
+import { useRef, useEffect, useReducer, useState } from "react";
 import { postOrder } from "./../utilities/post.js";
 import { useNavigate } from "react-router-dom";
 import Cardcvc from "./Cardcvc";
@@ -15,6 +15,21 @@ function Creditcard(props) {
     navigate("/confirmation");
   };
 
+  // for storing screen size
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
+  // for tracking screen size changes
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // initial state object for storing credit card information
   const initialState = {
     number: "",
     numberErr: false,
@@ -26,8 +41,10 @@ function Creditcard(props) {
     cvcErr: false,
   };
 
+  // useReducer hook for updating the credit card information state
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // reducer function for checking which property of the state has to be updated
   function reducer(state, action) {
     switch (action.type) {
       case "number":
@@ -127,10 +144,12 @@ function Creditcard(props) {
     dispatch({ type: "cvcErr", data: e.target.value.length < 3 });
   };
 
+  // focus on incorrectly filled in input
   const focusOnError = (errorField) => {
     errorField.current.focus();
   };
 
+  // check if there is any input that has been filled in incorrectly
   const checkForErrors = () => {
     if (state.number.length < 19) {
       return cardNumberRef;
@@ -177,6 +196,7 @@ function Creditcard(props) {
               ref={cardNumberRef}
               handleNumberInput={handleNumberInput}
               handleNumberBlur={handleNumberBlur}
+              windowDimensions={windowDimensions}
             />
           </div>
 
@@ -188,6 +208,7 @@ function Creditcard(props) {
               ref={cardNameRef}
               handleNameInput={handleNameInput}
               handleNameBlur={handleNameBlur}
+              windowDimensions={windowDimensions}
             />
           </div>
 
@@ -200,6 +221,7 @@ function Creditcard(props) {
                 ref={cardExpiryRef}
                 handleExpiryInput={handleExpiryInput}
                 handleExpiryBlur={handleExpiryBlur}
+                windowDimensions={windowDimensions}
               />
             </div>
 
@@ -211,6 +233,7 @@ function Creditcard(props) {
                 ref={cardCvcRef}
                 handleCvcInput={handleCvcInput}
                 handleCvcBlur={handleCvcBlur}
+                windowDimensions={windowDimensions}
               />
             </div>
           </div>
@@ -226,5 +249,13 @@ function Creditcard(props) {
     </section>
   );
 }
+
+const getWindowDimensions = () => {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+};
 
 export default Creditcard;
