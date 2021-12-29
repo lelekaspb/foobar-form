@@ -168,7 +168,7 @@ function Creditcard(props) {
       <main>
         <Backlink />
         <h1>payment</h1>
-        <form>
+        <form autoComplete="off">
           {/* card number input field */}
           <div className="line line_one">
             <Cardnumber

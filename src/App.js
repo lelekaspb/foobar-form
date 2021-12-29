@@ -1,4 +1,3 @@
-import Header from "./components/Header";
 import Landing from "./components/Landing";
 import Main from "./components/Main";
 import Creditcard from "./components/Creditcard";
@@ -11,11 +10,6 @@ function App() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [order, setOrder] = useState({ items: "", id: "" });
-  // const [orderID, setOrderID] = useState("");
-
-  useEffect(() => {
-    console.log(order);
-  }, [order]);
 
   // Fetching data
   useEffect(() => {
@@ -63,29 +57,24 @@ function App() {
     const counts = [];
     const uniqueBeers = [];
     const ordered = [];
-
     // Counting how many beers of each type is in the order
     cartItems.forEach((item) => {
       counts[item.name] = (counts[item.name] || 0) + 1;
-
       // Adding unique beers to an array
       if (counts[item.name] === 1) {
         uniqueBeers.push(item);
       }
     });
-
     // Building the order for posting
     uniqueBeers.forEach((elem) => {
       const oneBeerType = { name: elem.name, amount: counts[elem.name] };
       ordered.push(oneBeerType);
     });
-
     // set order state
     setOrder({ ...order, items: ordered });
   }
 
   const clearState = () => {
-    //setOrderID("");
     setOrder({ items: "", id: "" });
     setCartItems([]);
   };
