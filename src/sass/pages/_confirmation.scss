@@ -1,0 +1,134 @@
+@use "../base" as b;
+
+.Confirmation {
+  background-color: b.$bg-color;
+  color: b.$main-font-color;
+  margin-left: clamp(1rem, 2vw, 3vw);
+  margin-right: clamp(1rem, 2vw, 3vw);
+}
+
+.Confirmation main {
+  max-width: 70vw;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 0.4fr 0.6fr;
+  grid-template-rows: min-content 1fr;
+  column-gap: 2rem;
+  row-gap: calc(1rem + 2vh);
+
+  @media only screen and (max-width: 710px) {
+    max-width: 85vw;
+  }
+
+  @media only screen and (max-width: 550px) {
+    max-width: 90vw;
+  }
+
+  @media only screen and (max-width: 500px) {
+    row-gap: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content min-content;
+  }
+
+  .message {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 1;
+    text-align: center;
+    margin: 3rem 0 3rem 0;
+    @media only screen and (max-width: 500px) {
+      grid-column: 1 / span 1;
+      grid-row: 1 / span 1;
+    }
+
+    h1 {
+      font-size: b.$heading-font-size;
+      text-align: center;
+      @media only screen and (max-width: 500px) {
+        font-size: b.$m-heading-font-size;
+      }
+    }
+
+    p {
+      font-size: b.$bodytext-size;
+      margin-top: 1rem;
+      @media only screen and (max-width: 500px) {
+        font-size: b.$m-bodytext-size;
+      }
+    }
+  }
+
+  #order {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    @media only screen and (max-width: 1200px) {
+      align-items: center;
+    }
+    @media only screen and (max-width: 500px) {
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    h2 {
+      text-transform: uppercase;
+      font-size: calc(1.5rem + 1vw);
+      @media only screen and (max-width: 500px) {
+        font-size: calc(1.5rem + 0.5vw);
+      }
+    }
+
+    .beers {
+      margin-top: calc(1rem + 0.5vw + 0.5vh);
+      display: flex;
+      flex-direction: column;
+      @media only screen and (max-width: 500px) {
+        margin-top: 1rem;
+      }
+
+      span {
+        font-size: b.$bodytext-size;
+        margin: 0.3rem 0;
+        @media only screen and (max-width: 500px) {
+          font-size: b.$m-bodytext-size;
+        }
+      }
+    }
+  }
+
+  .picture {
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    @media only screen and (max-width: 500px) {
+      grid-column: 1 / span 1;
+      grid-row: 3 / span 1;
+      align-items: center;
+      justify-content: flex-start;
+      margin-left: 0;
+    }
+
+    img {
+      max-height: 50vh;
+      height: 80%;
+      width: auto;
+      @media only screen and (max-width: 610px) {
+        height: 28vh;
+        width: auto;
+      }
+    }
+  }
+}

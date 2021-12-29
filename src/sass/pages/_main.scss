@@ -1,0 +1,134 @@
+@use "../base" as b;
+$font-weight: 400;
+
+.Main {
+  background-color: b.$bg-color;
+  color: b.$main-font-color;
+  text-align: center;
+  font-weight: 400;
+}
+
+// Product list
+.ProductList {
+  display: grid;
+  grid-template-columns: repeat(3, 290px);
+  justify-content: space-evenly;
+  gap: 5rem 1vw;
+  margin: 5rem 2rem 3rem 2rem;
+  min-height: 920px;
+}
+
+// Product
+.Product {
+  display: flex;
+  h2 {
+    font-size: 30px;
+    font-weight: $font-weight;
+    margin-top: 1rem;
+  }
+  h3 {
+    font-size: 22px;
+    font-weight: $font-weight;
+    text-transform: uppercase;
+  }
+  img {
+    width: 160px;
+    height: 308px;
+  }
+  section:nth-of-type(1) {
+    width: 250px;
+  }
+  .plusMinus {
+    margin-top: 4rem;
+    margin-left: -30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+    p {
+      font-size: 50px;
+      padding-top: 1.3rem;
+      padding-bottom: 1.3rem;
+      font-weight: 700;
+    }
+  }
+}
+
+// Total price
+.TotalPrice {
+  font-size: 50px;
+  text-transform: uppercase;
+  margin-top: 6rem;
+  font-weight: $font-weight;
+}
+
+// Payment method
+.PaymentMethod {
+  padding-bottom: 5rem;
+  p {
+    font-size: 25px;
+    margin: 3rem 1rem;
+    font-weight: $font-weight;
+  }
+  section {
+    display: flex;
+    justify-content: center;
+    gap: 8vw;
+    margin-inline: 1rem;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .ProductList {
+    grid-template-columns: repeat(2, 290px);
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .TotalPrice {
+    font-size: calc(20px + 3.55vw);
+  }
+
+  .PaymentMethod {
+    p {
+      font-size: calc(15px + 1.2vw);
+    }
+    section {
+      gap: calc(10vw - 17px);
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .ProductList {
+    grid-template-columns: 290px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .Product {
+    h2 {
+      font-size: calc(20px + 2vw);
+    }
+    h3 {
+      font-size: calc(17px + 1vw);
+    }
+    img {
+      width: calc(30px + 26vw);
+      height: calc(58px + 50vw);
+    }
+    .plusMinus {
+      margin-top: calc(15vw - 10px);
+      margin-left: calc(14vw - 100px);
+      p {
+        font-size: calc(20px + 6vw);
+        padding-top: 4vw;
+        padding-bottom: 4vw;
+      }
+    }
+  }
+
+  .PaymentMethod {
+    padding-bottom: 16vw;
+  }
+}
