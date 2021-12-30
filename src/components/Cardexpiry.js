@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 
 const Cardexpiry = forwardRef(
   (
-    { expiry, err, handleExpiryInput, handleExpiryBlur, windowDimensions },
+    { expiry, err, handleInput, handleBlur, windowDimensions },
     forwardedRef
   ) => {
     return (
@@ -28,8 +28,8 @@ const Cardexpiry = forwardRef(
             id="card-expiry"
             name="name"
             inputMode="numeric"
-            onChange={handleExpiryInput}
-            onBlur={handleExpiryBlur}
+            onChange={handleInput}
+            onBlur={handleBlur}
           />
           <SuccessMessage show={expiry.length === 5} />
         </div>

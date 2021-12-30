@@ -101,49 +101,6 @@ function Creditcard({ order, setOrder }) {
     }
   }, [state.name]);
 
-  // change state of card number input based on input value
-  const handleNumberInput = (e) => {
-    dispatch({ type: "number", data: e.target.value });
-  };
-
-  // if card number is incomplete when a user is changing focus of the input, set the numberErr state to true
-  const handleNumberBlur = (e) => {
-    dispatch({ type: "numberErr", data: e.target.value.length < 19 });
-  };
-
-  // change state of card expiry input based on input value
-  const handleExpiryInput = (e) => {
-    dispatch({ type: "expiry", data: e.target.value });
-  };
-
-  // if card expiry is incomplete when a user is changing focus of the input, set the expiryErr state to true
-  const handleExpiryBlur = (e) => {
-    dispatch({ type: "expiryErr", data: e.target.value.length < 5 });
-  };
-
-  // change state of cardholder name input based on input value (accepting only letters)
-  const handleNameInput = (e) => {
-    dispatch({
-      type: "name",
-      data: e.target.value.replace(/[^a-zA-Zæøå\s]*$/gi, ""),
-    });
-  };
-
-  // if cardholder name contains less than 3 letters when a user is changing focus of the input, set the nameErr state to true
-  const handleNameBlur = (e) => {
-    dispatch({ type: "nameErr", data: e.target.value.length < 3 });
-  };
-
-  // change state of security code input based on input value
-  const handleCvcInput = (e) => {
-    dispatch({ type: "cvc", data: e.target.value });
-  };
-
-  // if security code is incomplete when a user is changing focus of the input, set the cvcErr state to true
-  const handleCvcBlur = (e) => {
-    dispatch({ type: "cvcErr", data: e.target.value.length < 3 });
-  };
-
   // focus on incorrectly filled in input
   const focusOnError = (errorField) => {
     errorField.current.focus();
@@ -194,8 +151,15 @@ function Creditcard({ order, setOrder }) {
               number={state.number}
               err={state.numberErr}
               ref={cardNumberRef}
-              handleNumberInput={handleNumberInput}
-              handleNumberBlur={handleNumberBlur}
+              handleInput={(e) => {
+                dispatch({ type: "number", data: e.target.value });
+              }}
+              handleBlur={(e) => {
+                dispatch({
+                  type: "numberErr",
+                  data: e.target.value.length < 19,
+                });
+              }}
               windowDimensions={windowDimensions}
             />
           </div>
@@ -206,8 +170,15 @@ function Creditcard({ order, setOrder }) {
               name={state.name}
               err={state.nameErr}
               ref={cardNameRef}
-              handleNameInput={handleNameInput}
-              handleNameBlur={handleNameBlur}
+              handleInput={(e) => {
+                dispatch({
+                  type: "name",
+                  data: e.target.value.replace(/[^a-zA-Zæøå\s]*$/gi, ""),
+                });
+              }}
+              handleBlur={(e) => {
+                dispatch({ type: "nameErr", data: e.target.value.length < 3 });
+              }}
               windowDimensions={windowDimensions}
             />
           </div>
@@ -219,8 +190,15 @@ function Creditcard({ order, setOrder }) {
                 expiry={state.expiry}
                 err={state.expiryErr}
                 ref={cardExpiryRef}
-                handleExpiryInput={handleExpiryInput}
-                handleExpiryBlur={handleExpiryBlur}
+                handleInput={(e) => {
+                  dispatch({ type: "expiry", data: e.target.value });
+                }}
+                handleBlur={(e) => {
+                  dispatch({
+                    type: "expiryErr",
+                    data: e.target.value.length < 5,
+                  });
+                }}
                 windowDimensions={windowDimensions}
               />
             </div>
@@ -231,8 +209,12 @@ function Creditcard({ order, setOrder }) {
                 cvc={state.cvc}
                 err={state.cvcErr}
                 ref={cardCvcRef}
-                handleCvcInput={handleCvcInput}
-                handleCvcBlur={handleCvcBlur}
+                handleInput={(e) => {
+                  dispatch({ type: "cvc", data: e.target.value });
+                }}
+                handleBlur={(e) => {
+                  dispatch({ type: "cvcErr", data: e.target.value.length < 3 });
+                }}
                 windowDimensions={windowDimensions}
               />
             </div>

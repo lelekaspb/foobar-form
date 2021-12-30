@@ -4,10 +4,7 @@ import MaskedInput from "react-text-mask";
 import { forwardRef } from "react";
 
 const Cardcvc = forwardRef(
-  (
-    { cvc, err, handleCvcInput, handleCvcBlur, windowDimensions },
-    forwardedRef
-  ) => {
+  ({ cvc, err, handleInput, handleBlur, windowDimensions }, forwardedRef) => {
     return (
       <>
         <label htmlFor="card-cvc" className="label cvc" ref={forwardedRef}>
@@ -24,8 +21,8 @@ const Cardcvc = forwardRef(
             id="card-cvc"
             name="cvc"
             inputMode="numeric"
-            onChange={handleCvcInput}
-            onBlur={handleCvcBlur}
+            onChange={handleInput}
+            onBlur={handleBlur}
           />
           <SuccessMessage show={cvc.length === 3} />
         </div>

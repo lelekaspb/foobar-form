@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 
 const Cardnumber = forwardRef(
   (
-    { number, err, handleNumberInput, handleNumberBlur, windowDimensions },
+    { number, err, handleInput, handleBlur, windowDimensions },
     forwardedRef
   ) => {
     return (
@@ -49,8 +49,8 @@ const Cardnumber = forwardRef(
             id="card-number"
             name="number"
             inputMode="numeric"
-            onChange={handleNumberInput}
-            onBlur={handleNumberBlur}
+            onChange={handleInput}
+            onBlur={handleBlur}
           />
           <SuccessMessage show={number.length === 19} />
         </div>
