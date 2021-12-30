@@ -4,7 +4,8 @@ import ErrorMessage from "./ErrorMessage";
 
 export default function PaymentMethod({
   cartItems,
-  buildOrder,
+  order,
+  setOrder,
   error,
   setError,
 }) {
@@ -14,6 +15,27 @@ export default function PaymentMethod({
   const redirectToPayment = () => {
     navigate(`/${payment}`);
   };
+
+  function buildOrder() {
+    const counts = [];
+    const uniqueBeers = [];
+    const ordered = [];
+    // Counting how many beers of each type is in the order
+    cartItems.forEach((item) => {
+      counts[item.name] = (counts[item.name] || 0) + 1;
+      // Adding unique beers to an array
+      if (counts[item.name] === 1) {
+        uniqueBeers.push(item);
+      }
+    });
+    // Building the order for posting
+    uniqueBeers.forEach((elem) => {
+      const oneBeerType = { name: elem.name, amount: counts[elem.name] };
+      ordered.push(oneBeerType);
+    });
+    // set order state
+    setOrder({ ...order, items: ordered });
+  }
 
   // Checking if there are beers in the cart and if a payment method selected
   function pay() {
@@ -32,29 +54,30 @@ export default function PaymentMethod({
   return (
     <article className="PaymentMethod">
       <p>Please choose a payment method</p>
+
       <section>
         <button
           className={`methods ${
-            payment === "Creditcard" ? "chosenMethod" : ""
+            payment === "creditcard" ? "chosenMethod" : ""
           }`}
           onClick={() => {
-            setPayment("Creditcard");
+            setPayment("creditcard");
             setError({ ...error, payment: false });
           }}
         >
           <img src="icons/creditcard-logo.svg" alt="Credit card icon" />
         </button>
         <button
-          className={`methods ${payment === "Mobilepay" ? "chosenMethod" : ""}`}
+          className={`methods ${payment === "mobilepay" ? "chosenMethod" : ""}`}
           onClick={() => {
-            setPayment("Mobilepay");
+            setPayment("mobilepay");
             setError({ ...error, payment: false });
           }}
         >
           <img src="icons/mobilepay-logo.svg" alt="Mobile pay icon" />
         </button>
       </section>
-      {/* <p>{errorMessage}</p> */}
+
       <ErrorMessage
         text={
           error.cart

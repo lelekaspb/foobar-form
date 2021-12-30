@@ -38,42 +38,6 @@ function App() {
     });
   }
 
-  //Removing beers from the cart
-  function removeFromCart(productToRemove) {
-    const indexOfFirstUnwantedItem = cartItems.findIndex(
-      (item) => item.name === productToRemove.name
-    );
-    // Creating two arrays: one before the item we want to remove, and one after it
-    const firstPart = cartItems.slice(0, indexOfFirstUnwantedItem);
-    const lastPart = cartItems.slice(
-      indexOfFirstUnwantedItem + 1,
-      cartItems.length
-    );
-    // Merging two arrays into one, that will not include the unwanted item
-    setCartItems([...firstPart, ...lastPart]);
-  }
-
-  function buildOrder() {
-    const counts = [];
-    const uniqueBeers = [];
-    const ordered = [];
-    // Counting how many beers of each type is in the order
-    cartItems.forEach((item) => {
-      counts[item.name] = (counts[item.name] || 0) + 1;
-      // Adding unique beers to an array
-      if (counts[item.name] === 1) {
-        uniqueBeers.push(item);
-      }
-    });
-    // Building the order for posting
-    uniqueBeers.forEach((elem) => {
-      const oneBeerType = { name: elem.name, amount: counts[elem.name] };
-      ordered.push(oneBeerType);
-    });
-    // set order state
-    setOrder({ ...order, items: ordered });
-  }
-
   const clearState = () => {
     setOrder({ items: "", id: "" });
     setCartItems([]);
@@ -89,11 +53,10 @@ function App() {
             element={
               <Main
                 products={products}
-                removeFromCart={removeFromCart}
-                totalPriceBeers={cartItems.length * 80}
                 cartItems={cartItems}
                 setCartItems={setCartItems}
-                buildOrder={buildOrder}
+                order={order}
+                setOrder={setOrder}
               />
             }
           />

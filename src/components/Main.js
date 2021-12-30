@@ -21,6 +21,21 @@ export default function Main(props) {
     });
   }
 
+  //Removing beers from the cart
+  function removeFromCart(productToRemove) {
+    const indexOfFirstUnwantedItem = props.cartItems.findIndex(
+      (item) => item.name === productToRemove.name
+    );
+    // Creating two arrays: one before the item we want to remove, and one after it
+    const firstPart = props.cartItems.slice(0, indexOfFirstUnwantedItem);
+    const lastPart = props.cartItems.slice(
+      indexOfFirstUnwantedItem + 1,
+      props.cartItems.length
+    );
+    // Merging two arrays into one, that will not include the unwanted item
+    props.setCartItems([...firstPart, ...lastPart]);
+  }
+
   return (
     <div className="Main">
       <Header />
@@ -28,14 +43,15 @@ export default function Main(props) {
         products={props.products}
         cartItems={props.cartItems}
         addToCart={addToCart}
-        removeFromCart={props.removeFromCart}
+        removeFromCart={removeFromCart}
       />
-      <TotalPrice totalPriceBeers={props.totalPriceBeers} />
+      <TotalPrice totalPriceBeers={props.cartItems.length * 80} />
       <PaymentMethod
         cartItems={props.cartItems}
         setError={setError}
         error={error}
-        buildOrder={props.buildOrder}
+        order={props.order}
+        setOrder={props.setOrder}
       />
     </div>
   );

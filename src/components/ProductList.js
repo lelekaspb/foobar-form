@@ -4,8 +4,6 @@ export default function ProductList(props) {
   // Creating an array with Product components
   const listOfBeers = props.products.map((product) => (
     <Product
-      // addBeersToTotalPrice={props.addBeersToTotalPrice}
-      // removeBeersFromTotalPrice={props.removeBeersFromTotalPrice}
       cartItems={props.cartItems}
       addToCart={props.addToCart}
       removeFromCart={props.removeFromCart}
