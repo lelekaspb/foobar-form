@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function PaymentMethod({ cartItems, errorMessage, setErrorMessage }) {
+export default function PaymentMethod({
+  cartItems,
+  errorMessage,
+  setErrorMessage,
+}) {
   const [chosen, setChosen] = useState("");
   const [creditCardClass, setCreditCardClass] = useState("methods");
   const [mobilePayClass, setMobilePayClass] = useState("methods");
@@ -68,17 +72,23 @@ export default function PaymentMethod({ cartItems, errorMessage, setErrorMessage
     <article className="PaymentMethod">
       <p>Please choose a payment method</p>
       <section>
-        <button className={creditCardClass} onClick={() => chosenMethod("/creditcard")}>
+        <button
+          className={creditCardClass}
+          onClick={() => chosenMethod("/creditcard")}
+        >
           <img src="icons/creditcard-logo.svg" alt="Credit card icon" />
         </button>
-        <button className={mobilePayClass} onClick={() => chosenMethod("/mobilepay")}>
+        <button
+          className={mobilePayClass}
+          onClick={() => chosenMethod("/mobilepay")}
+        >
           <img src="icons/mobilepay-logo.svg" alt="Mobile pay icon" />
         </button>
       </section>
       <p>{errorMessage}</p>
 
       <nav>
-        <Link to={chosen}>
+        <Link to={chosen} state={cartItems}>
           <button className="pay" onClick={pay}>
             Pay
           </button>

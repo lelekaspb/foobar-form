@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProductList from "./ProductList";
 import TotalPrice from "./TotalPrice";
 import PaymentMethod from "./PaymentMethod";
+import { useLocation } from "react-router-dom";
 
 export default function Main() {
   const [products, setProducts] = useState([]);
@@ -30,7 +31,9 @@ export default function Main() {
     setProducts((oldProducts) => {
       const beersOnTap = data.taps.map((tap) => tap.beer);
       console.log("Beers on tap:", beersOnTap);
-      const newProducts = oldProducts.filter((beer) => beersOnTap.includes(beer.name));
+      const newProducts = oldProducts.filter((beer) =>
+        beersOnTap.includes(beer.name)
+      );
       console.log("Available beers:", newProducts);
       return newProducts;
     });
@@ -63,14 +66,19 @@ export default function Main() {
 
   //Removing beers from the cart
   function removeFromCart(productToRemove) {
-    const indexOfFirstUnwantedItem = cartItems.findIndex((item) => item.name === productToRemove.name);
+    const indexOfFirstUnwantedItem = cartItems.findIndex(
+      (item) => item.name === productToRemove.name
+    );
 
     console.log("Index of first unwanted item:", indexOfFirstUnwantedItem);
 
     // Creating two arrays: one before the item we want to remove, and one after it
 
     const firstPart = cartItems.slice(0, indexOfFirstUnwantedItem);
-    const lastPart = cartItems.slice(indexOfFirstUnwantedItem + 1, cartItems.length);
+    const lastPart = cartItems.slice(
+      indexOfFirstUnwantedItem + 1,
+      cartItems.length
+    );
 
     // Merging two arrays into one, that will not include the unwanted item
 
@@ -78,6 +86,9 @@ export default function Main() {
   }
 
   console.log("Items in cart:", cartItems);
+
+  let location = useLocation();
+  console.log(location);
 
   return (
     <div className="Main">
@@ -90,7 +101,11 @@ export default function Main() {
         removeFromCart={removeFromCart}
       />
       <TotalPrice totalPriceBeers={totalPriceBeers} />
-      <PaymentMethod cartItems={cartItems} setErrorMessage={setErrorMessage} errorMessage={errorMessage} />
+      <PaymentMethod
+        cartItems={cartItems}
+        setErrorMessage={setErrorMessage}
+        errorMessage={errorMessage}
+      />
     </div>
   );
 }
