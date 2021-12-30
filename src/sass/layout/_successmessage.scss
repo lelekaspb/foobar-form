@@ -9,6 +9,7 @@
   align-items: baseline;
   opacity: 0;
   visibility: hidden;
+  transition: all 0.3s;
 
   img {
     height: calc(0.7rem + 0.5vw + 0.5vh);
