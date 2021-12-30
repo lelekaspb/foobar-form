@@ -1,3 +1,5 @@
 to do:
  - change autocomplete for mobile devices +
  - merge order and orderID states +
+ - add transitions to success / error messages
+ - improve expiry date validation (if first number in months is one. do not allow digits bigger than 2, and calculate today's year  -> allow not further ahead than 10 years)
