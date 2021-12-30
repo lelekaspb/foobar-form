@@ -1,15 +1,17 @@
 import Product from "./Product";
 
-export default function ProductList(props) {
+function ProductList({ products, cartItems, addToCart, removeFromCart }) {
   // Creating an array with Product components
-  const listOfBeers = props.products.map((product) => (
+  const listOfBeers = products.map((product) => (
     <Product
-      cartItems={props.cartItems}
-      addToCart={props.addToCart}
-      removeFromCart={props.removeFromCart}
+      cartItems={cartItems}
+      addToCart={addToCart}
+      removeFromCart={removeFromCart}
       key={product.name}
       {...product}
     />
   ));
   return <section className="ProductList">{listOfBeers}</section>;
 }
+
+export default ProductList;

@@ -1,4 +1,4 @@
-export default function Popup(props) {
+function Popup(props) {
   return (
     <article className="Popup">
       <div className="closeModal">
@@ -24,3 +24,5 @@ export default function Popup(props) {
     </article>
   );
 }
+
+export default Popup;

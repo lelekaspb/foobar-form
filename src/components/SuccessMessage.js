@@ -1,6 +1,6 @@
-function SuccessMessage(props) {
+function SuccessMessage({ show }) {
   return (
-    <div className={`success ${props.show ? "shown" : ""}`}>
+    <div className={`success ${show ? "shown" : ""}`}>
       <img src="icons/checkmark.svg" alt="success icon" />
     </div>
   );

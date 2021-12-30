@@ -1,7 +1,7 @@
-function ErrorMessage(props) {
+function ErrorMessage({ text, show }) {
   return (
-    <div className={`error ${props.show ? "shown" : ""}`}>
-      <span>{props.text}</span>
+    <div className={`error ${show ? "shown" : ""}`}>
+      <span>{text}</span>
     </div>
   );
 }

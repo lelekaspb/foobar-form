@@ -3,16 +3,16 @@ import Header from "./Header";
 import { postOrder } from "./../utilities/post.js";
 import { useNavigate } from "react-router-dom";
 
-function Mobilepay(props) {
+function Mobilepay({ order, setOrder }) {
   let navigate = useNavigate();
   const redirectToConfirmation = () => {
     navigate("/confirmation");
   };
 
   const handleClick = async () => {
-    const resp = await postOrder(props.order.items);
+    const resp = await postOrder(order.items);
     if (resp) {
-      props.setOrder({ ...props.order, id: resp.id });
+      setOrder({ ...order, id: resp.id });
       redirectToConfirmation();
     } else {
       alert("failed to post");

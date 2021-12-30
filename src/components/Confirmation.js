@@ -2,20 +2,20 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 
-function Confirmation(props) {
+function Confirmation({ order, id, clearState }) {
   let navigate = useNavigate();
   const redirectToLanding = () => {
     navigate("/");
   };
 
-  const beerItems = props.order.map((beer, index) => {
+  const beerItems = order.map((beer, index) => {
     return <span key={index}>{`${beer.amount}x   ${beer.name}`}</span>;
   });
 
   useEffect(() => {
     setTimeout(() => {
       redirectToLanding();
-      props.clearState();
+      clearState();
     }, 15000);
   });
 
@@ -32,7 +32,7 @@ function Confirmation(props) {
         </div>
         <article id="order">
           <div className="wrapper">
-            <h2>{`order #${props.id}`}</h2>
+            <h2>{`order #${id}`}</h2>
             <div className="beers">{beerItems}</div>
           </div>
         </article>

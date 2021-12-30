@@ -8,7 +8,7 @@ import Cardexpiry from "./Cardexpiry";
 import Cardname from "./Cardname";
 import Cardnumber from "./Cardnumber";
 
-function Creditcard(props) {
+function Creditcard({ order, setOrder }) {
   // for redirecting users to the confirmation component after posting their order
   let navigate = useNavigate();
   const redirectToConfirmation = () => {
@@ -168,9 +168,9 @@ function Creditcard(props) {
     const errorField = checkForErrors();
     if (!errorField) {
       // if all input fields are filled in correctly, post order and redirect the user to the confirmation page(component)
-      const resp = await postOrder(props.order.items);
+      const resp = await postOrder(order.items);
       if (resp) {
-        props.setOrder({ ...props.order, id: resp.id });
+        setOrder({ ...order, id: resp.id });
         redirectToConfirmation();
       } else {
         alert("failed to post");

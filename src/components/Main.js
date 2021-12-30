@@ -4,55 +4,57 @@ import PaymentMethod from "./PaymentMethod";
 import Header from "./Header";
 import { useState } from "react";
 
-export default function Main(props) {
+function Main({ cartItems, setCartItems, products, order, setOrder }) {
   const [error, setError] = useState({
     cart: false,
     payment: false,
   });
 
   // Adding beers to the cart
-  function addToCart(productToAdd) {
+  const addToCart = (productToAdd) => {
     if (error.cart === true) {
       setError({ ...error, cart: false });
     }
-    props.setCartItems((oldCartItems) => {
+    setCartItems((oldCartItems) => {
       const newCartItems = oldCartItems.concat(productToAdd);
       return newCartItems;
     });
-  }
+  };
 
   //Removing beers from the cart
-  function removeFromCart(productToRemove) {
-    const indexOfFirstUnwantedItem = props.cartItems.findIndex(
+  const removeFromCart = (productToRemove) => {
+    const indexOfFirstUnwantedItem = cartItems.findIndex(
       (item) => item.name === productToRemove.name
     );
     // Creating two arrays: one before the item we want to remove, and one after it
-    const firstPart = props.cartItems.slice(0, indexOfFirstUnwantedItem);
-    const lastPart = props.cartItems.slice(
+    const firstPart = cartItems.slice(0, indexOfFirstUnwantedItem);
+    const lastPart = cartItems.slice(
       indexOfFirstUnwantedItem + 1,
-      props.cartItems.length
+      cartItems.length
     );
     // Merging two arrays into one, that will not include the unwanted item
-    props.setCartItems([...firstPart, ...lastPart]);
-  }
+    setCartItems([...firstPart, ...lastPart]);
+  };
 
   return (
     <div className="Main">
       <Header />
       <ProductList
-        products={props.products}
-        cartItems={props.cartItems}
+        products={products}
+        cartItems={cartItems}
         addToCart={addToCart}
         removeFromCart={removeFromCart}
       />
-      <TotalPrice totalPriceBeers={props.cartItems.length * 80} />
+      <TotalPrice totalPriceBeers={cartItems.length * 80} />
       <PaymentMethod
-        cartItems={props.cartItems}
+        cartItems={cartItems}
         setError={setError}
         error={error}
-        order={props.order}
-        setOrder={props.setOrder}
+        order={order}
+        setOrder={setOrder}
       />
     </div>
   );
 }
+
+export default Main;

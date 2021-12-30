@@ -2,13 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "./ErrorMessage";
 
-export default function PaymentMethod({
-  cartItems,
-  order,
-  setOrder,
-  error,
-  setError,
-}) {
+function PaymentMethod({ cartItems, order, setOrder, error, setError }) {
   const [payment, setPayment] = useState("");
 
   let navigate = useNavigate();
@@ -16,7 +10,7 @@ export default function PaymentMethod({
     navigate(`/${payment}`);
   };
 
-  function buildOrder() {
+  const buildOrder = () => {
     const counts = [];
     const uniqueBeers = [];
     const ordered = [];
@@ -35,10 +29,10 @@ export default function PaymentMethod({
     });
     // set order state
     setOrder({ ...order, items: ordered });
-  }
+  };
 
   // Checking if there are beers in the cart and if a payment method selected
-  function pay() {
+  const pay = () => {
     if (cartItems.length === 0) {
       console.log("error: no items in the cart");
       setError({ ...error, cart: true });
@@ -49,7 +43,7 @@ export default function PaymentMethod({
       buildOrder();
       redirectToPayment();
     }
-  }
+  };
 
   return (
     <article className="PaymentMethod">
@@ -95,3 +89,5 @@ export default function PaymentMethod({
     </article>
   );
 }
+
+export default PaymentMethod;

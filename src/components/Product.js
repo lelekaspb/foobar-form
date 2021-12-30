@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Popup from "./Popup";
 
-export default function Product(props) {
+function Product(props) {
   const getInitialAmount = () => {
     const temp = props.cartItems.filter((item) => item.name === props.name);
     if (temp.length) {
@@ -25,7 +25,7 @@ export default function Product(props) {
   const beerImageWebp = `images/beers-webp/${imageName}.webp`;
   const beerImageAlt = `Glass with ${props.name} label`;
 
-  function plus() {
+  const plus = () => {
     // Incrementing the number of beers selected
     setAmount((oldAmount) => {
       if (oldAmount === 99) {
@@ -39,10 +39,10 @@ export default function Product(props) {
         name: props.name,
       });
     }
-  }
+  };
 
   // Decrementing the number of beers selected
-  function minus() {
+  const minus = () => {
     setAmount((oldAmount) => {
       if (oldAmount > 0) {
         return oldAmount - 1;
@@ -55,7 +55,7 @@ export default function Product(props) {
         name: props.name,
       });
     }
-  }
+  };
 
   return (
     <article className="Product">
@@ -92,3 +92,5 @@ export default function Product(props) {
     </article>
   );
 }
+
+export default Product;

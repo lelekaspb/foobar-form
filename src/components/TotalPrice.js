@@ -1,7 +1,5 @@
-export default function TotalPrice({ totalPriceBeers }) {
-  // Calculating total price
-
-  // const sum = totalPriceBeers * 80;
-
+function TotalPrice({ totalPriceBeers }) {
   return <h3 className="TotalPrice">Total: {totalPriceBeers} kr</h3>;
 }
+
+export default TotalPrice;
