@@ -1,12 +1,12 @@
 import Backlink from "./Backlink";
 import Header from "./Header";
-import { useRef, useEffect, useReducer, useState } from "react";
-import { postOrder } from "./../utilities/post.js";
-import { useNavigate } from "react-router-dom";
 import Cardcvc from "./Cardcvc";
 import Cardexpiry from "./Cardexpiry";
 import Cardname from "./Cardname";
 import Cardnumber from "./Cardnumber";
+import { useRef, useEffect, useReducer, useState } from "react";
+import { postOrder } from "./../utilities/post.js";
+import { useNavigate } from "react-router-dom";
 
 function Creditcard({ order, setOrder }) {
   // for redirecting users to the confirmation component after posting their order
