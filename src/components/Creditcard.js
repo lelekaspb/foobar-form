@@ -9,6 +9,7 @@ import Cardname from "./Cardname";
 import Cardnumber from "./Cardnumber";
 
 function Creditcard(props) {
+  console.log(props);
   // for redirecting users to the confirmation component after posting their order
   let navigate = useNavigate();
   const redirectToConfirmation = () => {
