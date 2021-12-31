@@ -5,7 +5,7 @@ import { forwardRef } from "react";
 
 const Cardexpiry = forwardRef(
   (
-    { expiry, err, handleInput, handleBlur, windowDimensions },
+    { expiry, err, invalid, handleInput, handleBlur, windowDimensions },
     forwardedRef
   ) => {
     return (
@@ -33,7 +33,10 @@ const Cardexpiry = forwardRef(
           />
           <SuccessMessage show={expiry.length === 5} />
         </div>
-        <ErrorMessage text={"Expiry date must be 4 digits"} show={err} />
+        <ErrorMessage
+          text={invalid ? "Invalid format" : "Expiry date must be 4 digits"}
+          show={err}
+        />
       </>
     );
   }

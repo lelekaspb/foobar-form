@@ -37,6 +37,7 @@ function Creditcard({ order, setOrder }) {
     nameErr: false,
     expiry: "",
     expiryErr: false,
+    expiryInvalid: false,
     cvc: "",
     cvcErr: false,
   };
@@ -63,11 +64,26 @@ function Creditcard({ order, setOrder }) {
         return { ...state, cvc: action.data };
       case "cvcErr":
         return { ...state, cvcErr: action.data };
+      case "expiryInvalid":
+        return { ...state, expiryInvalid: action.data };
 
       default:
         throw new Error();
     }
   }
+
+  const validateExpiry = (expiry) => {
+    const d = new Date();
+    const year = d.getFullYear() - 2000;
+    if (expiry.split("/")[0] > 12 || expiry.split("/")[1] > year + 10) {
+      dispatch({ type: "expiryErr", data: true });
+      dispatch({ type: "expiryInvalid", data: true });
+      return false;
+    } else {
+      dispatch({ type: "expiryInvalid", data: false });
+      return true;
+    }
+  };
 
   // refs for accessing input elements
   const cardNumberRef = useRef("");
@@ -84,7 +100,10 @@ function Creditcard({ order, setOrder }) {
 
   useEffect(() => {
     if (state.expiry.length === 5) {
-      cardCvcRef.current.focus();
+      const isCorrect = validateExpiry(state.expiry);
+      if (isCorrect) {
+        cardCvcRef.current.focus();
+      }
     }
   }, [state.expiry]);
 
@@ -189,6 +208,7 @@ function Creditcard({ order, setOrder }) {
               <Cardexpiry
                 expiry={state.expiry}
                 err={state.expiryErr}
+                invalid={state.expiryInvalid}
                 ref={cardExpiryRef}
                 handleInput={(e) => {
                   dispatch({ type: "expiry", data: e.target.value });
