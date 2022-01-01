@@ -31,7 +31,7 @@ const Cardexpiry = forwardRef(
             onChange={handleInput}
             onBlur={handleBlur}
           />
-          <SuccessMessage show={expiry.length === 5} />
+          <SuccessMessage show={expiry.length === 5 && !invalid} />
         </div>
         <ErrorMessage
           text={invalid ? "Invalid format" : "Expiry date must be 4 digits"}
