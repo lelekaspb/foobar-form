@@ -171,7 +171,7 @@ function Creditcard({ order, setOrder }) {
       <main>
         <Backlink />
         <h1>payment</h1>
-        <form autoComplete="off">
+        <form autoComplete={windowDimensions.width < 600 ? "on" : "off"}>
           {/* card number input field */}
           <div className="line line_one">
             <Cardnumber

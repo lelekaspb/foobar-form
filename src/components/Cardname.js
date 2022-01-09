@@ -12,13 +12,11 @@ const Cardname = forwardRef(
         <div className="input_wrapper">
           <input
             type="text"
-            name="name"
+            name="ccname"
             className={`${err ? "incomplete" : ""}`}
             id="card-name"
             placeholder="John Doe"
-            autoComplete={
-              windowDimensions.width < 600 ? "cc-name" : "new-password"
-            }
+            autoComplete={windowDimensions.width < 600 ? "cc-name" : "off"}
             ref={forwardedRef}
             value={name}
             onChange={handleInput}
