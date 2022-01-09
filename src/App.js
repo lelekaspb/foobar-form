@@ -38,6 +38,7 @@ function App() {
     });
   }
 
+  // empty cart and order states (after confirmation)
   const clearState = () => {
     setOrder({ items: "", id: "" });
     setCartItems([]);
