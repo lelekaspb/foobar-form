@@ -16,7 +16,9 @@ const Cardname = forwardRef(
             className={`${err ? "incomplete" : ""}`}
             id="card-name"
             placeholder="John Doe"
-            autoComplete={windowDimensions.width < 600 ? "cc-name" : "nope"}
+            autoComplete={
+              windowDimensions.width < 600 ? "cc-name" : "new-password"
+            }
             ref={forwardedRef}
             value={name}
             onChange={handleInput}

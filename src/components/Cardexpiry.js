@@ -22,7 +22,9 @@ const Cardexpiry = forwardRef(
             mask={[/[0-9]/, /\d/, "/", /\d/, /\d/]}
             className={`form-control ${err ? "incomplete" : ""}`}
             placeholder="04/23"
-            autoComplete={windowDimensions.width < 600 ? "cc-exp" : "nope"}
+            autoComplete={
+              windowDimensions.width < 600 ? "cc-exp" : "new-password"
+            }
             guide={false}
             value={expiry}
             id="card-expiry"

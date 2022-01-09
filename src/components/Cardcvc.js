@@ -15,7 +15,9 @@ const Cardcvc = forwardRef(
             mask={[/[0-9]/, /\d/, /\d/, /\d/]}
             className={`form-control ${err ? "incomplete" : ""}`}
             placeholder="123"
-            autoComplete={windowDimensions.width < 600 ? "cc-csc" : "nope"}
+            autoComplete={
+              windowDimensions.width < 600 ? "cc-csc" : "new-password"
+            }
             guide={false}
             value={cvc}
             id="card-cvc"

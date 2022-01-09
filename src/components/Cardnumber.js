@@ -43,7 +43,9 @@ const Cardnumber = forwardRef(
             autoFocus
             className={`form-control ${err ? "incomplete" : ""}`}
             placeholder="1234 5678 9012 3456"
-            autoComplete={windowDimensions.width < 600 ? "cc-number" : "nope"}
+            autoComplete={
+              windowDimensions.width < 600 ? "cc-number" : "new-password"
+            }
             guide={false}
             value={number}
             id="card-number"
