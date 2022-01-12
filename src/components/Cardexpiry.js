@@ -19,9 +19,9 @@ const Cardexpiry = forwardRef(
         </label>
         <div className="input_wrapper">
           <MaskedInput
-            mask={[/[0-9]/, /\d/, "/", /\d/, /\d/]}
+            mask={[/[0-9]/, /\d/, "/", /\d/, /\d/, /\d/, /\d/]}
             className={`form-control ${err ? "incomplete" : ""}`}
-            placeholder="04/23"
+            placeholder="04/2023"
             autoComplete={windowDimensions.width < 600 ? "cc-exp" : "off"}
             guide={false}
             value={expiry}

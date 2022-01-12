@@ -10,11 +10,7 @@ const Cardnumber = forwardRef(
   ) => {
     return (
       <>
-        <label
-          htmlFor="card-number"
-          ref={forwardedRef}
-          className="label number"
-        >
+        <label htmlFor="cc-number" ref={forwardedRef} className="label number">
           Card number
         </label>
         <div className="input_wrapper">
@@ -46,8 +42,8 @@ const Cardnumber = forwardRef(
             autoComplete={windowDimensions.width < 600 ? "cc-number" : "off"}
             guide={false}
             value={number}
-            id="card-number"
-            name="cardnumber"
+            id="cc-number"
+            name="cc-number"
             inputMode="numeric"
             onChange={handleInput}
             onBlur={handleBlur}

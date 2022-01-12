@@ -74,8 +74,10 @@ function Creditcard({ order, setOrder }) {
 
   const validateExpiry = (expiry) => {
     const d = new Date();
-    const year = d.getFullYear() - 2000;
+    const year = d.getFullYear();
     const month = d.getMonth() + 1;
+
+    console.log(year);
 
     if (
       expiry.split("/")[0] > 12 ||
