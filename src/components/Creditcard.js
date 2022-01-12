@@ -109,7 +109,7 @@ function Creditcard({ order, setOrder }) {
   }, [state.number]);
 
   useEffect(() => {
-    if (state.expiry.length === 5) {
+    if (state.expiry.length === 7) {
       const isCorrect = validateExpiry(state.expiry);
       if (isCorrect) {
         cardCvcRef.current.focus();
@@ -141,7 +141,7 @@ function Creditcard({ order, setOrder }) {
       return cardNumberRef;
     } else if (state.name.length < 3) {
       return cardNameRef;
-    } else if (state.expiry.length < 5) {
+    } else if (state.expiry.length < 7) {
       return cardExpiryRef;
     } else if (state.cvc.length < 3) {
       return cardCvcRef;
@@ -226,7 +226,7 @@ function Creditcard({ order, setOrder }) {
                 handleBlur={(e) => {
                   dispatch({
                     type: "expiryErr",
-                    data: e.target.value.length < 5,
+                    data: e.target.value.length < 7,
                   });
                 }}
                 windowDimensions={windowDimensions}
@@ -250,7 +250,7 @@ function Creditcard({ order, setOrder }) {
             </div>
           </div>
 
-          <div className="line">
+          {/* <div className="line">
             <label className="label" htmlFor="email">
               Email
             </label>
@@ -261,9 +261,9 @@ function Creditcard({ order, setOrder }) {
               placeholder="example@gmail.com"
               autoComplete={windowDimensions.width < 600 ? "email" : "off"}
             />
-          </div>
+          </div> */}
 
-          <div className="line">
+          {/* <div className="line">
             <label htmlFor="phone" className="label">
               Phone
             </label>
@@ -274,7 +274,7 @@ function Creditcard({ order, setOrder }) {
               placeholder="+45 11 11 11 11"
               autoComplete={windowDimensions.width < 600 ? "tel" : "off"}
             />
-          </div>
+          </div> */}
 
           {/* submit button */}
           <div className="line line_four">
