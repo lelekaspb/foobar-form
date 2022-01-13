@@ -77,8 +77,6 @@ function Creditcard({ order, setOrder }) {
     const year = d.getFullYear();
     const month = d.getMonth() + 1;
 
-    console.log(year);
-
     if (
       expiry.split("/")[0] > 12 ||
       (parseInt(expiry.split("/")[0]) < month &&
@@ -249,32 +247,6 @@ function Creditcard({ order, setOrder }) {
               />
             </div>
           </div>
-
-          {/* <div className="line">
-            <label className="label" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="text"
-              name="email"
-              id="email"
-              placeholder="example@gmail.com"
-              autoComplete={windowDimensions.width < 600 ? "email" : "off"}
-            />
-          </div> */}
-
-          {/* <div className="line">
-            <label htmlFor="phone" className="label">
-              Phone
-            </label>
-            <input
-              type="text"
-              name="phone"
-              id="phone"
-              placeholder="+45 11 11 11 11"
-              autoComplete={windowDimensions.width < 600 ? "tel" : "off"}
-            />
-          </div> */}
 
           {/* submit button */}
           <div className="line line_four">
