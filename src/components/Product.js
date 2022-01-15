@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Popup from "./Popup";
 
 function Product(props) {
@@ -14,6 +14,16 @@ function Product(props) {
   const togglePopup = () => {
     setPopupOpen(!popupOpen);
   };
+
+  useEffect(() => {
+    const togglePopup = () => {
+      setPopupOpen(!popupOpen);
+    };
+    if (popupOpen) {
+      window.addEventListener("click", togglePopup);
+      return () => window.removeEventListener("click", togglePopup);
+    }
+  }, [popupOpen]);
 
   // Setting path to images with the glasses
   const imageName = props.name.replaceAll(" ", "").toLowerCase();
