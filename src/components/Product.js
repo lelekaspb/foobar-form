@@ -4,11 +4,7 @@ import Popup from "./Popup";
 function Product(props) {
   const getInitialAmount = () => {
     const temp = props.cartItems.filter((item) => item.name === props.name);
-    if (temp.length) {
-      return temp.length;
-    } else {
-      return 0;
-    }
+    return temp.length;
   };
 
   const [amount, setAmount] = useState(getInitialAmount());
